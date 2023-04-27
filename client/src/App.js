@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import './App.css';
-
+import './index.css';
 import VerifyOtp from "./Registration/VerifyOtp";
 import RegistrationDetails from './Registration/RegistrationDetails';
+
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-black">
       Hello world!
       <Router>
         <Routes>

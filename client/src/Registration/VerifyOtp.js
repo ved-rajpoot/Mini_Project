@@ -23,7 +23,7 @@ const VerifyOtp = () => {
     .catch(err=>console.log(err));
   }
 
-  const verifyOtp = ()=>{
+  const submitOtp = ()=>{
     axios.post("https://api.emptra.com/aadhaarVerification/submitOtp",{OTP, client_id},{
       headers:{
         'secretKey': 'xBDrtOSlPGiAfZabVFPJG2RsvhydbyUgYnxJTSKmclK1Fb9HD62Qb1qnynQM4uBPh',
@@ -50,7 +50,7 @@ const VerifyOtp = () => {
               <input className="p-2 mt-4 rounded-xl border" type="text" name="name" placeholder="Enter aadhar number" value={aadhaarNumber} onChange={(e)=>{setAadhaarNumber(e.target.value)}}/>
               <button className="bg-[#002D74] rounded-xl text-white py-2 top-2 hover:scale-105 duration-300" onClick={getOtp}>Get OTP</button>
               <input className="p-2 mt-4 rounded-xl border" type="text" name="name" placeholder="Enter aadhar number" value={OTP} onChange={(e)=>{setOTP(e.target.value)}}/>
-              <button className="bg-[#002D74] rounded-xl text-white py-2 top-2 hover:scale-105 duration-300" onClick={verifyOtp}>Verify OTP</button>
+              <button className="bg-[#002D74] rounded-xl text-white py-2 top-2 hover:scale-105 duration-300" onClick={submitOtp}>Verify OTP</button>
             </form>
           </div>
         </div>
