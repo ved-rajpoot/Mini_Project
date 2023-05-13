@@ -1,12 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 const VerifyOtp = () => {
+  const navigate = useNavigate();
 
   const [aadhaarNumber,setAadhaarNumber] = useState(null);
   const [client_id, setClient_id] = useState(null);
   const [OTP, setOTP] = useState(null);
-
+  const [aadhaarDetails, setAadhaarDetails] = useState(null);
 
   const getOtp = ()=>{
     axios.post("https://api.emptra.com/aadhaarVerification/requestOtp", {aadhaarNumber},{
@@ -16,8 +19,8 @@ const VerifyOtp = () => {
       }
     })
     .then((res)=>{
-      // console.log(res);
-      setClient_id(res.data.result.data.client_id);
+      console.log(res);
+      // setClient_id(res.data.result.data.client_id);
 
     })
     .catch(err=>console.log(err));
@@ -31,7 +34,10 @@ const VerifyOtp = () => {
       }
     })
     .then((res)=>{
+        // one check needs to be implemented weather thee OTP is correct or not.
         console.log(res);
+        setAadhaarDetails(res);
+        navigate('/registration/enterdetails');
     })
     .catch(err=>console.log(err));
   }
@@ -47,11 +53,18 @@ const VerifyOtp = () => {
             <h2 className="font-bold text-2xl text-[#002D74]">Register</h2>
 
             <form onSubmit={(e) => e.preventDefault()} action="" className="flex flex-shrink flex-col gap-2">
-              <input className="p-2 mt-4 rounded-xl border" type="text" name="name" placeholder="Enter aadhar number" value={aadhaarNumber} onChange={(e)=>{setAadhaarNumber(e.target.value)}}/>
-              <button className="bg-[#002D74] rounded-xl text-white py-2 top-2 hover:scale-105 duration-300" onClick={getOtp}>Get OTP</button>
-              <input className="p-2 mt-4 rounded-xl border" type="text" name="name" placeholder="Enter aadhar number" value={OTP} onChange={(e)=>{setOTP(e.target.value)}}/>
-              <button className="bg-[#002D74] rounded-xl text-white py-2 top-2 hover:scale-105 duration-300" onClick={submitOtp}>Verify OTP</button>
+              <div className="flex flex-shrink flex-col gap-2">
+                <input className="p-2 mt-4 rounded-xl border" type="text" name="name" placeholder="Enter aadhaar number" value={aadhaarNumber} onChange={(e)=>  {setAadhaarNumber(e.target.value)}}/>
+                <button className="bg-[#002D74] rounded-xl text-white py-2 top-2 hover:scale-105 duration-300" onClick={getOtp}>Get OTP</button>
+                <p class="pl-3 text-sm text-green-600 dark:text-green-500"><span class="font-medium">OTP sent!</span></p>
+              </div>
+
+              <div className="flex flex-shrink flex-col gap-2">
+                <input className="p-2 mt-4 rounded-xl border" type="text" name="name" placeholder="Enter OTP" value={OTP} onChange={(e)=>{setOTP(e.target.value)}}/>
+                <button className="bg-[#002D74] rounded-xl text-white py-2 top-2 hover:scale-105 duration-300" onClick={submitOtp}>Verify OTP</button>
+              </div>
             </form>
+            
           </div>
         </div>
       </section>
