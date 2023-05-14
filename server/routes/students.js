@@ -1,12 +1,20 @@
 import express from "express"
-import { addStudent, markAttendence, getStudents } from "../controllers/student.js"
+import { addStudent, markAttendence, getPresent, resetAttendence, getAbsent } from "../controllers/student.js"
 const router = express.Router()
 
 //create student
 router.post("/", addStudent)
 
-router.put("/:id", markAttendence)
+//mark a student present
+router.put("/", markAttendence)
 
-router.get("/all", getStudents)
+//get all who are absent
+router.get("/absent", getAbsent)
+
+//reset attendence
+router.put("/reset", resetAttendence)
+
+//get all who are present
+router.get("/present", getPresent)
 
 export default router
