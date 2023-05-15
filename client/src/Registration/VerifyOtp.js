@@ -14,8 +14,8 @@ const VerifyOtp = () => {
   const getOtp = ()=>{
     axios.post("https://api.emptra.com/aadhaarVerification/requestOtp", {aadhaarNumber},{
       headers:{
-        'secretKey': 'xBDrtOSlPGiAfZabVFPJG2RsvhydbyUgYnxJTSKmclK1Fb9HD62Qb1qnynQM4uBPh',
-        'ClientId' : '3e72a6db51ab5e616ff79c6e3134c4ac:294564a77a92fef8fbfc28284c1b6ccd'
+        'secretKey': 'b9zYKHjrP9ieueWUjtSCtpi0nIlEckO6Vl1OOXC7SPNkitilRTfYivOhg7OMNcRp',
+        'ClientId' : '800e1ef152e95de4c1f8532ae46b5868:5b96c64e84f68712cbd9f832943f3208'
       }
     })
     .then((res)=>{
@@ -29,8 +29,8 @@ const VerifyOtp = () => {
   const submitOtp = ()=>{
     axios.post("https://api.emptra.com/aadhaarVerification/submitOtp",{OTP, client_id},{
       headers:{
-        'secretKey': 'xBDrtOSlPGiAfZabVFPJG2RsvhydbyUgYnxJTSKmclK1Fb9HD62Qb1qnynQM4uBPh',
-        'ClientId' : '3e72a6db51ab5e616ff79c6e3134c4ac:294564a77a92fef8fbfc28284c1b6ccd'
+        'secretKey': 'b9zYKHjrP9ieueWUjtSCtpi0nIlEckO6Vl1OOXC7SPNkitilRTfYivOhg7OMNcRp7',
+        'ClientId' : 'b9zYKHjrP9ieueWUjtSCtpi0nIlEckO6Vl1OOXC7SPNkitilRTfYivOhg7OMNcRp7'
       }
     })
     .then((res)=>{
