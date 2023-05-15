@@ -4,11 +4,15 @@ export const addStudent = async (req, res, next)=>{
     const newStudent = new Student({
         aadhaarId: req.body.aadhaarId,
         name: req.body.name,
+        fathersName: req.body.fathersName,
         dob: req.body.dob,
-        gender: req.body.gender
+        gender: req.body.gender,
+        phone: req.body.phone,
+        email: req.body.email,
     })
     try{
         const savedStudent = await newStudent.save()
+        console.log(savedStudent);
         res.status(200).json(savedStudent)
     }catch(err){
         next(err)

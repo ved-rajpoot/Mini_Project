@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -9,38 +9,45 @@ const VerifyOtp = () => {
   const [aadhaarNumber,setAadhaarNumber] = useState(null);
   const [client_id, setClient_id] = useState(null);
   const [OTP, setOTP] = useState(null);
-  const [aadhaarDetails, setAadhaarDetails] = useState(null);
+  const [studentDetails, setStudentDetails] = useState(null);
 
   const getOtp = ()=>{
     axios.post("https://api.emptra.com/aadhaarVerification/requestOtp", {aadhaarNumber},{
       headers:{
-        'secretKey': 'b9zYKHjrP9ieueWUjtSCtpi0nIlEckO6Vl1OOXC7SPNkitilRTfYivOhg7OMNcRp',
+        'secretKey': 'b9zYKHjrP9ieueWUjtSCtpi0nIlEckO6Vl1OOXC7SPNkitilRTfYivOhg7OMNcRp7',
         'ClientId' : '800e1ef152e95de4c1f8532ae46b5868:5b96c64e84f68712cbd9f832943f3208'
       }
     })
     .then((res)=>{
       console.log(res);
-      // setClient_id(res.data.result.data.client_id);
-
+      console.log('clientid ',res.data.result.data.client_id);
+      setClient_id(res.data.result.data.client_id);
     })
     .catch(err=>console.log(err));
   }
 
   const submitOtp = ()=>{
-    axios.post("https://api.emptra.com/aadhaarVerification/submitOtp",{OTP, client_id},{
+    axios.post("https://api.emptra.com/aadhaarVerification/submitOtp",{otp:OTP, client_id},{
       headers:{
         'secretKey': 'b9zYKHjrP9ieueWUjtSCtpi0nIlEckO6Vl1OOXC7SPNkitilRTfYivOhg7OMNcRp7',
-        'ClientId' : 'b9zYKHjrP9ieueWUjtSCtpi0nIlEckO6Vl1OOXC7SPNkitilRTfYivOhg7OMNcRp7'
+        'ClientId' : '800e1ef152e95de4c1f8532ae46b5868:5b96c64e84f68712cbd9f832943f3208'
       }
     })
     .then((res)=>{
         // one check needs to be implemented weather thee OTP is correct or not.
         console.log(res);
-        setAadhaarDetails(res);
-        navigate('/registration/enterdetails');
+        const details = res.data.result.data;
+        setStudentDetails({name:details.full_name,aadhaarId:details.aadhaar_number,dob:details.dob,fathersName:details.care_of,gender:details.gender});
+        
     })
     .catch(err=>console.log(err));
   }
+
+  useEffect(()=>{
+    if(studentDetails!==null) {
+      navigate('/enterdetails',{state:{studentDetails}});
+    }
+  },[studentDetails]);
 
   return (
 

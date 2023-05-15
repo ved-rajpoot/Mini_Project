@@ -3,7 +3,7 @@ import express from "express"
 import mongoose from "mongoose"
 //npm i dotenv
 import dotenv from "dotenv"
-
+import cors from 'cors';
 import studentRoutes from "./routes/students.js"
 
 const app = express()
@@ -20,6 +20,7 @@ const connect = ()=>{
 
 //ALLOW ANY JSON FILE FROM OUTSIDE FOR TESTING PURPOSE
 app.use(express.json())
+app.use(cors());
 //MIDDLEWARE TO HANDLE ERRORS
 app.use((err, req, res, next)=>{
     const status = err.status || 500;

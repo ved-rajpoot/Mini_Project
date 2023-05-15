@@ -9,6 +9,10 @@ const StudentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    fathersName: {
+        type: String,
+        required: true
+    },
     dob:{
         type: String,
         required: true,
@@ -17,8 +21,16 @@ const StudentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    present:{
+    phone: {
+        type: Number,
+        required:true
+    },
+    email: {
         type: String,
+        required:true
+    },
+    present:{
+        type: [String],
         default: "false",
     }
 })
